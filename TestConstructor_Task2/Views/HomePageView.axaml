@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TestConstructor_Task2.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="TestConstructor_Task2.Views.HomePageView"
+             x:DataType="vm:HomePageViewModel">
+    
+    <ScrollViewer>
+        <StackPanel HorizontalAlignment="Center" Spacing="20">
+            <TextBlock Margin="0 20"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Text="Welcome to 'Simple Test Constructor' Tool">
+            </TextBlock>
+            <TextBlock Margin="10"
+                       FontSize="16"
+                       TextWrapping="Wrap"
+                       Width="500"
+                       TextAlignment="Center"
+                       Text="Use the toolbar to create new test or look through archive
+                       to choose and complete one of existing tests">
+            </TextBlock>
+            <TextBlock Text="You can also click on buttons on this page to start immediately"
+                       HorizontalAlignment="Center"
+                       IsVisible="{Binding ButtonsVisibility}">
+            </TextBlock>
+            <StackPanel Margin="10"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        IsVisible="{Binding ButtonsVisibility}">
+                <Button Margin="50 0"
+                        FontSize="16" FontStyle="Italic"
+                        Content="Create new Test"
+                        Command="{Binding OpenConstructorCommand}"
+                        CommandParameter="{Binding}">
+                </Button>
+                <Button Margin="50 0"
+                        FontSize="16" FontStyle="Italic"
+                        Content="Open Archive"
+                        Command="{Binding OpenArchiveCommand}"
+                        CommandParameter="{Binding}">
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

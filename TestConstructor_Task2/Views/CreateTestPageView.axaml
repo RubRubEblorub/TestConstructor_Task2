@@ -1,0 +1,89 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TestConstructor_Task2.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="TestConstructor_Task2.Views.CreateTestPageView"
+             x:DataType="vm:CreateTestPageViewModel">
+    
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            <ItemsControl ItemsSource="{Binding Tests}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Spacing="10">
+                            <StackPanel Orientation="Horizontal" Spacing="20">
+                                <TextBlock Text="Test name:"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center"/>
+                                <TextBox MinWidth="100"
+                                         MaxWidth="400"
+                                         Text="{Binding TestName}"/>
+                            </StackPanel>
+                            <StackPanel Margin="10"
+                                        MinWidth="200"
+                                        MaxWidth="500">
+                                <ItemsControl ItemsSource="{Binding Questions}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Spacing="10" Margin="0, 10">
+                                                <TextBox Text="{Binding QuestionText}"/>
+                                                <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
+                                                    <Button Content="Add option"
+                                                            Command="{Binding Test.AddAnswerOptionCommand}"
+                                                            CommandParameter="{Binding}"/>
+                                                    <Button Content="Delete"
+                                                            Command="{Binding Test.DeleteQuestionCommand}"
+                                                            CommandParameter="{Binding }"/>
+                                                </StackPanel>
+                                                <ItemsControl ItemsSource="{Binding AnswerOptions}">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Width="500"
+                                                                        Orientation="Horizontal"
+                                                                        Spacing="20">
+                                                                <TextBox Text="{Binding OptionText}"
+                                                                         MinWidth="80"
+                                                                         MaxWidth="300"/>
+                                                                <RadioButton GroupName="{Binding Question.QuestionId}"
+                                                                             Content="is answer"
+                                                                             IsChecked="{Binding IsCorrect}"/>
+                                                                <Button Content="remove"
+                                                                        Command="{Binding Question.DeleteAnswerOptionCommand}"
+                                                                        CommandParameter="{Binding}"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Button Content="Add question"
+                                        Command="{Binding AddQuestionCommand}"
+                                        HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <StackPanel Spacing="10" HorizontalAlignment="Center">
+                <Button Content="Create new Test"
+                        CornerRadius="10"
+                        Command="{Binding CreateTestCommand}"
+                        CommandParameter="{Binding}"
+                        HorizontalAlignment="Center"
+                        FontSize="16"/>
+                <Button Content="Save Test to Archive"
+                        Command="{Binding SaveTestCommand}"
+                        CommandParameter="{Binding}"
+                        IsVisible="{Binding SaveButtonIsVisible}"
+                        CornerRadius="10"
+                        FontSize="16"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>

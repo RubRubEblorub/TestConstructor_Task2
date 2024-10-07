@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="TestConstructor_Task2/App.axaml" value="TestConstructor_Task2/TestConstructor_Task2.csproj" />
+        <entry key="TestConstructor_Task2/Assets/Icons.axaml" value="TestConstructor_Task2/TestConstructor_Task2.csproj" />
+        <entry key="TestConstructor_Task2/Assets/icons.axaml" value="TestConstructor_Task2/TestConstructor_Task2.csproj" />
+        <entry key="TestConstructor_Task2/Views/ArchivePageView.axaml" value="TestConstructor_Task2/TestConstructor_Task2.csproj" />
+        <entry key="TestConstructor_Task2/Views/ConstructorPageView.axaml" value="TestConstructor_Task2/TestConstructor_Task2.csproj" />
+        <entry key="TestConstructor_Task2/Views/CreateTestPageView.axaml" value="TestConstructor_Task2/TestConstructor_Task2.csproj" />
+        <entry key="TestConstructor_Task2/Views/HomePageView.axaml" value="TestConstructor_Task2/TestConstructor_Task2.csproj" />
+        <entry key="TestConstructor_Task2/Views/MainWindow.axaml" value="TestConstructor_Task2/TestConstructor_Task2.csproj" />
+        <entry key="TestConstructor_Task2/Views/TestPageView.axaml" value="TestConstructor_Task2/TestConstructor_Task2.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

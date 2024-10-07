@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TestConstructor_Task2.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="TestConstructor_Task2.Views.TestPageView"
+             x:DataType="vm:TestPageViewModel">
+    
+    <ScrollViewer>
+        <StackPanel>
+            <ItemsControl ItemsSource="{Binding Questions}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Width="400">
+                            <TextBox Text="{Binding QuestionText, Mode=TwoWay}"
+                                     IsVisible="{Binding !IsSaved}"/>
+                            <TextBlock Text="{Binding QuestionText}"
+                                       IsVisible="{Binding IsSaved}"/>
+                            <Button Content="Add option"
+                                    Command="{Binding $parent[UserControl].((vm:TestPageViewModel)DataContext).AddAnswerOptionCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding !IsSaved}"/>
+                            <ItemsControl ItemsSource="{Binding AnswerOptions}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Width="300"
+                                                    Orientation="Horizontal"
+                                                    Spacing="10">
+                                            <RadioButton GroupName="{Binding $parent[ItemsControl].((vm:Question)DataContext).GroupNameOption}"
+                                                         IsVisible="{Binding $parent[ItemsControl].((vm:Question)DataContext).IsSaved}"/>
+                                            <TextBox Text="{Binding OptionText, Mode=TwoWay}"
+                                                     IsVisible="{Binding !$parent[ItemsControl].((vm:Question)DataContext).IsSaved}"/>
+                                            <TextBlock Text="{Binding OptionText}"
+                                                       IsVisible="{Binding $parent[ItemsControl].((vm:Question)DataContext).IsSaved}"/>
+                                            <RadioButton GroupName="{Binding $parent[ItemsControl].((vm:Question)DataContext).GroupNameCorrect}"
+                                                         Content="is answer" 
+                                                         IsChecked="{Binding IsCorrect, Mode=TwoWay}"
+                                                         IsVisible="{Binding !$parent[ItemsControl].((vm:Question)DataContext).IsSaved}"/>
+                                            <Button Content="remove"
+                                                    Command="{Binding $parent[ItemsControl].((vm:Question)DataContext).DeleteAnswerOptionCommand}"
+                                                    CommandParameter="{Binding}"
+                                                    IsVisible="{Binding !$parent[ItemsControl].((vm:Question)DataContext).IsSaved}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Button Content="Apply"
+                                    Command="{Binding $parent[UserControl].((vm:TestPageViewModel)DataContext).SaveQuestionCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding !IsSaved}"/>
+                            <Button Content="Delete"
+                                    Command="{Binding $parent[UserControl].((vm:TestPageViewModel)DataContext).DeleteQuestionCommand}"
+                                    CommandParameter="{Binding }"
+                                    IsVisible="{Binding IsSaved}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <StackPanel HorizontalAlignment="Right">
+                <Button Content="Add question"
+                        Command="{Binding AddQuestionCommand}"
+                        HorizontalAlignment="Right"/>
+                <Button Content="Save Test to Archive"
+                        Command="{Binding SaveTestCommand}"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+    
+</UserControl>
