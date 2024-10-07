@@ -12,8 +12,8 @@ sealed class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        string _saveFilePath = Environment.CurrentDirectory;
         string _fileName = "DataBase.json";
+        string _saveFilePath = Environment.CurrentDirectory + Path.DirectorySeparatorChar + _fileName;
 
         if (!File.Exists(_saveFilePath))
         {
