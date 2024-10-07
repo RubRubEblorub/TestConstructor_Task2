@@ -10,7 +10,7 @@ namespace TestConstructor_Task2.ViewModels;
 
 public partial class ArchivePageViewModel : ViewModelBase
 {
-    private static readonly string SaveFilePath = Environment.CurrentDirectory + "\\DataBase.json";
+    private static string _saveFilePath = Environment.CurrentDirectory + "\\DataBase.json";
 
     public ObservableCollection<Test> Tests { get; set; }
     
@@ -26,7 +26,7 @@ public partial class ArchivePageViewModel : ViewModelBase
             ReferenceHandler = ReferenceHandler.Preserve
         };
         
-        var json = File.ReadAllText(SaveFilePath);
+        var json = File.ReadAllText(_saveFilePath);
         Tests = JsonSerializer.Deserialize<ObservableCollection<Test>>(json, options);
     }
 

@@ -18,7 +18,7 @@ public partial class CreateTestPageViewModel : ViewModelBase
         ReferenceHandler = ReferenceHandler.Preserve
     };
     
-    private static readonly string SaveFilePath = Environment.CurrentDirectory + "\\DataBase.json";
+    private static string _saveFilePath = Environment.CurrentDirectory + "\\DataBase.json";
 
     [ObservableProperty]
     private bool _saveButtonIsVisible;
@@ -35,7 +35,7 @@ public partial class CreateTestPageViewModel : ViewModelBase
     [RelayCommand]
     private void SaveTest()
     {
-        var json = File.ReadAllText(SaveFilePath);
+        var json = File.ReadAllText(_saveFilePath);
         
         if (json != string.Empty)
         {
@@ -46,11 +46,11 @@ public partial class CreateTestPageViewModel : ViewModelBase
                 jsonTests.Add(test);
             }
             
-            File.WriteAllText(SaveFilePath, JsonSerializer.Serialize(jsonTests, options));
+            File.WriteAllText(_saveFilePath, JsonSerializer.Serialize(jsonTests, options));
         }
         else
         {
-            File.WriteAllText(SaveFilePath, JsonSerializer.Serialize(Tests, options));
+            File.WriteAllText(_saveFilePath, JsonSerializer.Serialize(Tests, options));
         }
         
         Tests.Clear();
